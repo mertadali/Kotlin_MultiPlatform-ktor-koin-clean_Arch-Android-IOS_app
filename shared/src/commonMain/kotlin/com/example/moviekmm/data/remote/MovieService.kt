@@ -12,7 +12,7 @@ internal class MovieService : KtorApi(){
 
     }.body()
 
-    suspend fun getPopularMovie(movieID : String) : MovieRemote = client.get {     // just getting single data
+    suspend fun getPopularMovie(movieID : Int) : MovieRemote = client.get {     // just getting single data
         pathUrl("movie/${movieID}")
     }.body()
 }
