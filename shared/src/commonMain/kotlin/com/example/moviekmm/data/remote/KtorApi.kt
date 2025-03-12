@@ -1,5 +1,7 @@
 package com.example.moviekmm.data.remote
 
+import com.example.moviekmm.utils.Constants.API_KEY
+import com.example.moviekmm.utils.Constants.BASE_URL
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.HttpRequestBuilder
@@ -9,15 +11,13 @@ import io.ktor.http.takeFrom
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
-private const val  BASE_URL = "https://api.themoviedb.org/"
-private const val API_KEY = ""
 
 internal abstract class KtorApi {
     val client = HttpClient {
-       install(ContentNegotiation){
+       install(ContentNegotiation){             // used content negotiation  for converting json
            json(Json {
                ignoreUnknownKeys = true
-               useAlternativeNames = false
+               useAlternativeNames = false  // ->  blocking Conflict
            })
        }
     }
@@ -29,6 +29,7 @@ internal abstract class KtorApi {
             parameter("api_key", API_KEY)
 
         }
-
     }
+
 }
+
